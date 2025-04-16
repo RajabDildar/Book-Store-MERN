@@ -1,21 +1,20 @@
 import express from "express";
-import { PORT } from "./config.js";
 import { mongoose } from "mongoose";
 import booksRouter from "./routes/booksRouter.js";
 import cors from "cors";
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 // middlewares
 app.use(express.json());
-app.use(cors());
-/* app.use(
+app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "http://localhost:5173",
     methods: ["GET", "PUT", "POST", "DELETE"],
     allowedHeaders: ["Content-Type"],
   })
-); */
+);
 
 app.get("/", (req, res) => {
   res.status(234).send("Hello world!!!!");
@@ -31,6 +30,6 @@ mongoose
       console.log(`server is running at ${PORT}`);
     });
   })
-  .catch((error) => {
+  .catch(() => {
     console.log("Failed to connect with DB");
   });
